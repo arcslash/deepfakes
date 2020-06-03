@@ -12,7 +12,7 @@ Pytorch
 ## What can be expected from this repo
 
 ### DeepFakes for Face Change
-- [ ] Adding Face Detection
+- [x] Adding Face Detection
 - [ ] Developing GAN to generate faces
 - [ ] Face / Object Substitution
 - [ ] Training on New data
