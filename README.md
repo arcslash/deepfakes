@@ -12,11 +12,11 @@ Pytorch
 ## What can be expected from this repo
 
 ### DeepFakes for Face Change
-- [] Adding Face Detection
-- [] Developing GAN to generate faces
-- [] Face / Object Substitution
-- [] Training on New data
-- [] UI interface to carryout training
+- [ ] Adding Face Detection
+- [ ] Developing GAN to generate faces
+- [ ] Face / Object Substitution
+- [ ] Training on New data
+- [ ] UI interface to carryout training
 
 ### DeepFakes for Object change
 Todo 
@@ -41,4 +41,4 @@ pip install -r requirements.txt
 I am running on Linux so could'nt test on other platforms, but it should work on those platforms as well (If not make a issue? or help me fix it?)
 ## Credits
 
-* [facenet-pytorch](https://github.com/timesler/facenet-pytorch)
+* [facenet-pytorch](https://github.com/timesler/facenet-pytorch) - Thanks for Amazing library for face detection
