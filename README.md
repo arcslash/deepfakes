@@ -1,5 +1,5 @@
-# DeepFakes - Under Developement
-Inspired from original /r/Deepfakes thread
+# DeepFakes+ - Under Developement
+Inspired from original /r/Deepfakes thread and some ideas that deepfakes can be put into use othere than malicous use.
 
 
 Here contains, necessary scripting to implement your own deepfakes clone and tools necessary to train on your own.
@@ -26,6 +26,7 @@ Pytorch
 - [ ] Object Tracking and Detection
 - [ ] Developing GAN to style transfer
 - [ ] Object Substitution
+- [ ] Scene Construction
 
 ## How to get started
 
