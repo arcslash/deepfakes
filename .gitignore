@@ -1,3 +1,5 @@
-env
-data
-process_data
+venv/
+data/
+.idea/
+process_data/
+poetry.lock
