@@ -7,8 +7,16 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
-# Dependencies will be added here by poetry add
+python = "^3.10" # Reverted to ^3.10 to be compatible with numpy
+numpy = "^2.2.6" # Kept existing version
+pillow = "^11.2.1" # Kept existing version
+opencv-python = "^4.11.0.86" # Kept existing version
+typer = {extras = ["all"], version = "^0.15.4"} # Kept existing version, added 'all' extras for typer as it's common
+torch = "*"
+torchvision = "*"
+facenet-pytorch = "*"
+timm = "==0.5.4"
+mmcv-full = "*"
 
 [build-system]
 requires = ["poetry-core"]
