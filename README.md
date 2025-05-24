@@ -19,8 +19,9 @@ Pytorch
 ### DeepFakes for Face Change
 - [x] Adding Face Detection
 - [ ] Adding Face Tracking through Video Frames
-- [ ] Developing GAN to face style transfer
-- [x] Face Substitution
+- [ ] Developing GAN to face style transfer (Interface and SimSwap skeleton added)
+- [x] Face Substitution (Geometric and GAN-framework based)
+- [ ] Full SimSwap GAN Integration (currently skeleton and framework)
 - [ ] Training on New data
 - [ ] UI interface to carryout training
 
@@ -71,6 +72,44 @@ This project uses [Poetry](https://python-poetry.org/) for dependency management
 
 I am primarily developing and testing on Linux. While Poetry aims for cross-platform compatibility, if you encounter issues on other platforms, please feel free to raise an issue or contribute a fix.
 
+## Using GAN-based Face Swapping (Experimental)
+
+This project now includes a framework for integrating GAN-based face swapping models, with a skeleton implementation for SimSwap (`SimSwapWrapper`).
+
+**Important Notes:**
+*   The current `SimSwapWrapper` is a **skeleton**. It provides the structure but **does not** contain the actual SimSwap model loading and inference logic from `neuralchen/SimSwap`.
+*   To achieve full SimSwap functionality, users will need to:
+    1.  Clone the [neuralchen/SimSwap](https://github.com/neuralchen/SimSwap) repository.
+    2.  Download their pretrained models (SimSwap generator, ArcFace model, etc.).
+    3.  Integrate the core SimSwap model loading and inference calls into `src/deepfakes/simswap_wrapper.py`. The current wrapper has placeholder comments where this logic should go.
+
+**Command-Line Arguments for GAN Swapping (SimSwap Example):**
+
+When using the CLI (`poetry run python src/deepfakes/cli.py detect ...` or `poetry run deepfakes-cli detect ...`), the following arguments are relevant for GAN-based swapping if you have integrated a model like SimSwap into the wrapper:
+
+*   `--source <path_to_source_image>`: Path to the source face image (required for any swapping).
+*   `--gan-model simswap`: Specifies that you intend to use the SimSwap model via its wrapper.
+*   `--gan-weights <path_to_simswap_checkpoint.pth>`: Path to the pretrained SimSwap generator model weights.
+*   `--arcface-path <path_to_arcface_model.tar>`: Path to the ArcFace model weights, which SimSwap uses for identity encoding.
+*   `--simswap-root <path_to_cloned_SimSwap_repo>`: (Optional) If your `SimSwapWrapper` implementation directly imports modules from the `neuralchen/SimSwap` repository, provide the root path to that cloned repository here. This path will be added to `sys.path` by the wrapper.
+*   `--gan-config <path_to_simswap_options.yml>`: (Optional) Path to any SimSwap-specific configuration file if your `SimSwapWrapper` is designed to use one (e.g., a YAML file defining SimSwap's internal options).
+
+**Example CLI Usage (Conceptual, after full SimSwap integration in wrapper):**
+```bash
+poetry run python src/deepfakes/cli.py detect path/to/target_video.mp4 \
+    --type video \
+    --source path/to/source_face.jpg \
+    --gan-model simswap \
+    --gan-weights /path/to/your/simswap_checkpoint.pth \
+    --arcface-path /path/to/your/arcface_model.tar \
+    --simswap-root /path/to/your/cloned/SimSwap_repo \
+    --output output/
+```
+
+**Extending `SimSwapWrapper`:**
+Users are encouraged to modify `src/deepfakes/simswap_wrapper.py` to include the actual operational code from the `neuralchen/SimSwap` project. The existing placeholder methods (`load_model`, `swap_face`, `_preprocess_face`, `_postprocess_output`) guide where the integration should occur.
+
 ## Credits
 
 * [facenet-pytorch](https://github.com/timesler/facenet-pytorch) - Thanks for Amazing library for face detection
+* The SimSwap GAN model concept is based on the work by [neuralchen/SimSwap](https://github.com/neuralchen/SimSwap).
