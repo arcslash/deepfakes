@@ -1,0 +1,53 @@
+name: Python CI
+
+on:
+  push:
+    branches: [ main ] # Assuming 'main' is the default branch. Adjust if it's 'master' or other.
+  pull_request:
+    branches: [ main ] # Assuming 'main' is the default branch.
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10"]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install Poetry
+      run: |
+        pipx install poetry
+        poetry --version # To confirm installation
+
+    - name: Configure Poetry (optional, for caching behavior)
+      run: |
+        poetry config virtualenvs.in-project true --local || poetry config virtualenvs.create true --local # Creates .venv in project
+        # The above ensures .venv is created locally for easier caching if preferred.
+        # Alternatively, cache global poetry venvs: ~/.cache/pypoetry/virtualenvs
+
+    - name: Cache Poetry virtualenv
+      uses: actions/cache@v3 # Using v3, ensure this is the latest or appropriate version
+      with:
+        path: .venv # Cache the local virtual environment if virtualenvs.in-project is true
+        # For global cache: path: ~/.cache/pypoetry/virtualenvs
+        # The key needs to be very specific for Python version and lock file hash
+        key: ${{ runner.os }}-poetry-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-poetry-${{ matrix.python-version }}-
+
+    - name: Install dependencies
+      run: |
+        poetry install --no-interaction --no-ansi # --no-root is not needed if running tests that import the package
+
+    - name: Run tests
+      run: |
+        poetry run python -m unittest discover tests
