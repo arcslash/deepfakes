@@ -1,0 +1,7 @@
+torch
+facenet-pytorch
+opencv-python
+mmcv-full
+numpy
+Pillow
+typer
