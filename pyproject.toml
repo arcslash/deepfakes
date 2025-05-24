@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "deepfakes-plus"
+version = "0.1.0"
+description = "A project for deepfakes experimentation, including face swapping."
+authors = ["Your Name <you@example.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+# Dependencies will be added here by poetry add
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
