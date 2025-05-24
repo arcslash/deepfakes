@@ -20,7 +20,7 @@ Pytorch
 - [x] Adding Face Detection
 - [ ] Adding Face Tracking through Video Frames
 - [ ] Developing GAN to face style transfer
-- [ ] Face Substitution
+- [x] Face Substitution
 - [ ] Training on New data
 - [ ] UI interface to carryout training
 
