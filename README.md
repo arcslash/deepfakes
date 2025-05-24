@@ -30,23 +30,44 @@ Pytorch
 
 ## How to get started
 
-As the start make a virtual environment i've used python3 ( who use python2 anyway?) 
-Make a virtual environment with whatever name you like, i've used env for simplicity, If you don't care you can directly install in the system as well.
-Then Install the requirements as specified in requirements.txt
+This project uses [Poetry](https://python-poetry.org/) for dependency management and packaging.
 
-on linux or mac os
-```
-python3 -m venv env
-pip3 install -r requirements.txt
-```
+1.  **Install Poetry:**
+    If you don't have Poetry installed, you can install it by following the official instructions on the [Poetry website](https://python-poetry.org/docs/#installation).
+    A common method for Linux, macOS, and Windows (WSL) is:
+    ```bash
+    curl -sSL https://install.python-poetry.org | python3 -
+    ```
+    For other methods, including Windows PowerShell, please refer to the official documentation.
 
-on windows
+2.  **Install Project Dependencies:**
+    Navigate to the project root directory (where `pyproject.toml` is located) and run:
+    ```bash
+    poetry install
+    ```
+    This command will create a virtual environment if one doesn't exist and install all the dependencies specified in `pyproject.toml`.
 
-```
-py -m venv env
-pip3 install -r requirements.txt
-```
-I am running on Linux so could'nt test on other platforms, but it should work on those platforms as well (If not make a issue? or help me fix it?)
+3.  **Activate the Virtual Environment (Optional but Recommended):**
+    You can activate the virtual environment managed by Poetry by running:
+    ```bash
+    poetry shell
+    ```
+    Once activated, you can run Python scripts directly (e.g., `python src/deepfakes/main.py`).
+
+4.  **Running Scripts with Poetry:**
+    If you haven't activated the shell, you can run your scripts using `poetry run`:
+    *   To run the main application:
+        ```bash
+        poetry run python src/deepfakes/main.py
+        ```
+    *   To use the command-line interface (CLI):
+        ```bash
+        poetry run deepfakes-cli --help
+        ```
+        (Note: The exact CLI command `deepfakes-cli` depends on how entry points are configured in `pyproject.toml`. If not yet configured, you might run it as `poetry run python src/deepfakes/cli.py --help`.)
+
+I am primarily developing and testing on Linux. While Poetry aims for cross-platform compatibility, if you encounter issues on other platforms, please feel free to raise an issue or contribute a fix.
+
 ## Credits
 
 * [facenet-pytorch](https://github.com/timesler/facenet-pytorch) - Thanks for Amazing library for face detection
