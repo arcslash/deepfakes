@@ -1,4 +1,7 @@
 # DeepFakes+ - Under Developement
+
+[![CI Pipeline Status](https://github.com/arcslash/deepfakes/actions/workflows/ci.yml/badge.svg)](https://github.com/arcslash/deepfakes/actions)
+
 Inspired from original /r/Deepfakes thread and some ideas that deepfakes can be put into use othere than malicous use.
 
 
